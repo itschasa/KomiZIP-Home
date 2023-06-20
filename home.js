@@ -21,7 +21,7 @@ const rotateImage = function(chapter) {
 
 const toggleVolumeCover = function() {
     for (let index = 0; index < global_chapter_order.length; index++) {
-        var chapter_num = global_chapter_order[index]
+        var chapter_num = global_chapter_order[index].replaceAll('.', '_')
         var chapter_data = global_chapter_data[chapter_num]
         if (chapter_data.metadata.volume_cover == true) {
             if (covers_enabled) {
@@ -57,7 +57,7 @@ const loadChapterData = function(data) {
     var revere_order = data.order.reverse()
 
     for (let index = 0; index < revere_order.length; index++) {
-        var chapter_num = revere_order[index]
+        var chapter_num = revere_order[index].replaceAll('.', '_')
         var chapter_data = data.chapters[chapter_num]
         
         // col does not exists
@@ -85,7 +85,7 @@ const loadChapterData = function(data) {
             var img_data = ``
             var hide_img = ``
             if (chapter_data.metadata.volume_cover == true) {
-                img_data = `<img id="c-${chapter_num}-img-vol" src="https://cdn.komi.zip/cdn/vol${chapter_data.metadata.volume}.jpg" class="card-img">`
+                img_data = `<img id="c-${chapter_num}-img-vol" loading="lazy" src="https://cdn.komi.zip/cdn/vol${chapter_data.metadata.volume}.jpg" class="card-img">`
                 hide_img = ' d-none'
             }
             
@@ -94,18 +94,18 @@ const loadChapterData = function(data) {
                     <div class="row g-0 h-100">
                         <div class="col-4 py-2 px-1 h-100">
                             <div class="ratio ratio-1x1 h-100 ms-1" onclick="rotateImage('${chapter_num}')">
-                                <img id="c-${chapter_num}-img" src="https://cdn.komi.zip/cdn/${chapter_num}-01.jpg" class="card-img${hide_img}">
+                                <img id="c-${chapter_num}-img" loading="lazy" src="https://cdn.komi.zip/cdn/${chapter_num.replaceAll('_', '.')}-01.jpg" class="card-img${hide_img}">
                                 ${img_data}
                             </div>
                         </div>
                         <div class="col-8 d-flex flex-column h-100">
                             <div class="card-body flex-grow-1 d-flex flex-column">
-                                <h5 class="mb-1 chapter-title">Chapter ${chapter_num}</h5>
+                                <h5 class="mb-1 chapter-title">Chapter ${chapter_num.replaceAll('_', '.')}</h5>
                                 <h6 id="c-${chapter_num}-vol" class="chapter-subtitle">Volume: ${volume}</h6>
                                 <p id="c-${chapter_num}-title" class="flex-grow-1">${title}</p>
                                 <div class="mt-auto d-flex flex-wrap">
                                     ${viz_buttons}
-                                    <a href="https://read.komi.zip/${chapter_num}" id="c-${chapter_num}-zip">
+                                    <a href="https://read.komi.zip/${chapter_num.replaceAll('_', '.')}" id="c-${chapter_num}-zip">
                                         <button class="btn btn-zip flex-grow-1 me-2 mt-1">
                                             <i data-feather="book-open"></i>
                                             Read

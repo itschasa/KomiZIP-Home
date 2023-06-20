@@ -192,9 +192,9 @@ $('#chapter-input').on('input', function() {
     for (let index = 0; index < global_chapter_order.length; index++) {
         var chapter_num = global_chapter_order[index]
         if (chapter_num == input || input == "") {
-            $(`#c-${chapter_num}`).show()
+            $(`#c-${chapter_num.replaceAll('.', '_')}`).show()
         } else {
-            $(`#c-${chapter_num}`).hide()
+            $(`#c-${chapter_num.replaceAll('.', '_')}`).hide()
         }
     }
 

@@ -178,9 +178,9 @@ $('#volume-input').on('input', function() {
         var chapter_num = global_chapter_order[index]
         var chapter_data = global_chapter_data[chapter_num]
         if (chapter_data.metadata.volume == input || input == "") {
-            $(`#c-${chapter_num}`).show()
+            $(`#c-${chapter_num.replaceAll('.', '_')}`).show()
         } else {
-            $(`#c-${chapter_num}`).hide()
+            $(`#c-${chapter_num.replaceAll('.', '_')}`).hide()
         }
     }
 

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        
+        <link href="https://komi.zip/style.css" rel="stylesheet">
+        
+        <title>komi.zip</title>
+    </head>
+    
+    <body>
+        <div class="row m-0 w-100 text-center mb-2 header">
+            <div class="col-12 mb-3">
+                <a href="https://komi.zip/" target="_blank">
+                    <img src="https://komi.zip/logo.webp" class="logo-img" alt="komi.zip logo">
+                </a>
+                <br>
+                
+                <span class="text">komi.zip</span>
+                <br>
+            </div>
+        </div>
+
+        <div class="row mx-0 mt-4 w-100 text-center justify-content-center">
+            <div style="min-width: 400px; width: 25vw;">
+                <div class="search-bar">
+                    <i data-feather="key" class="search-icon"></i>
+                    <input type="password" placeholder="Password" class="search-input" id="password">
+                </div>
+                <br>
+                <textarea style="resize: both;" id='command'></textarea>
+                <br>
+                <button onclick="submit()" class="btn btn-primary">submit</button>
+                <br>
+                <br>
+                <span class="text" id="results">results here</span>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+        <script>
+            feather.replace()
+            
+            const submit = function() {
+                const options = {
+                    url: 'https://api.komi.zip/v1/admin/edit',
+                    method: 'POST',
+                    data: {
+                        pwd: $('#password').val(),
+                        data: $('#command').val()
+                    }
+                };
+                                
+                axios(options)
+                    .then(function (response) {
+                        console.log(response);
+                        $('#results').html(response.data.edited)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        $('#results').html(error.response.data.description)
+                    });
+            }
+        </script>
+
+    </body>
+
+</html>

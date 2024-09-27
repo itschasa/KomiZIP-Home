@@ -2,7 +2,7 @@ feather.replace()
 
 var last_load_time = Math.floor(new Date() / 1000)
 var user_country = null // X-Ip-Country
-const allowed_countries = ['US,NA', "CA,NA"]
+const allowed_countries = ['US,NA', "CA,NA", "GB,EU", "AU,OC", "NZ,OC", "IE,EU"]
 var global_chapter_data = null
 var global_chapter_order = null
 var covers_enabled = true
